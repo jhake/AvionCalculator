@@ -116,8 +116,8 @@ var equalPressed = function() {
 
         display.innerHTML = currentOperands[0];
         newOperand = true;
+        clearKey.textContent = 'AC'
     }
-    clearKey.textContent = 'AC'
 }
 
 var acPressed = function() {
