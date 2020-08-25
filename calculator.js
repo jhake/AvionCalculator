@@ -94,7 +94,11 @@ var equalPressed = function() {
         currentOperands[1] = Number(display.innerHTML);
     }
 
-    if(currentOperands[0] !== undefined && currentOperands[1] !== undefined) {
+    if(currentOperands[0] !== undefined) {
+        if(currentOperands[1] === undefined) {
+            currentOperands[1] = currentOperands[0];
+        }
+
         switch(currentOperation) {
             case "add":
                 currentOperands[0] += currentOperands[1];
