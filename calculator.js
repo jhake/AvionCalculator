@@ -66,20 +66,7 @@ var decimalPressed = function() {
 var operatorPressed = function(operation) {
     if(currentOperands[0] !== undefined && !newOperand) {
         currentOperands[1] = Number(display.innerHTML);
-        switch(currentOperation) {
-            case "add":
-                currentOperands[0] += currentOperands[1];
-                break
-            case "subtract":
-                currentOperands[0] -= currentOperands[1];
-                break;
-            case "multiply":
-                currentOperands[0] *= currentOperands[1];
-                break;
-            case "divide":
-                currentOperands[0] /= currentOperands[1];
-                break;
-        }
+        currentOperands[0] = calculate(currentOperands[0], currentOperands[1], currentOperation)
         display.innerHTML = currentOperands[0];
     } else {
         currentOperands[0] = Number(display.innerHTML);
@@ -99,21 +86,7 @@ var equalPressed = function() {
             currentOperands[1] = currentOperands[0];
         }
 
-        switch(currentOperation) {
-            case "add":
-                currentOperands[0] += currentOperands[1];
-                break
-            case "subtract":
-                currentOperands[0] -= currentOperands[1];
-                break;
-            case "multiply":
-                currentOperands[0] *= currentOperands[1];
-                break;
-            case "divide":
-                currentOperands[0] /= currentOperands[1];
-                break;
-        }
-
+        currentOperands[0] = calculate(currentOperands[0], currentOperands[1], currentOperation)
         display.innerHTML = currentOperands[0];
         newOperand = true;
         clearKey.textContent = 'AC'
@@ -131,4 +104,23 @@ var cePressed = function() {
     clearKey.textContent = 'AC'
     display.innerHTML = "0";
     newOperand = true;
+}
+
+var calculate = function(op1, op2, operation) {
+    let result = undefined;
+    switch(operation) {
+        case "add":
+            result = op1 + op2;
+            break
+        case "subtract":
+            result = op1 - op2;
+            break;
+        case "multiply":
+            result = op1 * op2;
+            break;
+        case "divide":
+            result = op1 / op2;
+            break;
+    }
+    return result;
 }
