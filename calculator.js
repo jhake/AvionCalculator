@@ -107,20 +107,14 @@ var cePressed = function() {
 }
 
 var calculate = function(op1, op2, operation) {
-    let result = undefined;
     switch(operation) {
         case "add":
-            result = op1 + op2;
-            break
+            return op1 + op2;
         case "subtract":
-            result = op1 - op2;
-            break;
+            return op1 - op2;
         case "multiply":
-            result = op1 * op2;
-            break;
+            return op1 * op2;
         case "divide":
-            result = op1 / op2;
-            break;
+            return op1 / op2;
     }
-    return result;
 }
