@@ -64,12 +64,12 @@ var operatorPressed = function(operation) {
     if (currentOperands[0] !== undefined && !newOperand) {
         currentOperands[1] = Number(display.innerHTML);
         currentOperands[0] = calculate(currentOperands[0], currentOperands[1], currentOperation)
-        display.innerHTML = currentOperands[0];
+        display.innerHTML = formatOutput(currentOperands[0]);
         newOperand = true;
     } else {
-        currentOperands[0] = Number(display.innerHTML);
+        if (currentOperands[0] === undefined) currentOperands[0] = Number(display.innerHTML);
         newOperand = true;
-    }   
+    }
 
     currentOperation = operation;
 }
@@ -85,7 +85,7 @@ var equalPressed = function() {
         }
 
         currentOperands[0] = calculate(currentOperands[0], currentOperands[1], currentOperation)
-        display.innerHTML = currentOperands[0];
+        display.innerHTML = formatOutput(currentOperands[0]);
         newOperand = true;
         clearKey.textContent = 'AC'
     }
@@ -115,4 +115,20 @@ var calculate = function(op1, op2, operation) {
         case "divide":
             return op1 / op2;
     }
+}
+
+var formatOutput = function(result) {
+    if (result >= 9.9999999e+99) {
+        return "Overflow";
+    }
+    if (result <= 1e-99) {
+        return 0;
+    }
+    if (result >= 1e+7 || result <= 1e-4) {
+        return result.toExponential(7);
+    }
+    if (String(result).length >= 10) {
+        return String(result).substr(0, 13);
+    } 
+    return result;
 }
