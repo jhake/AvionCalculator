@@ -4,6 +4,8 @@ const display = document.querySelector('.calculator__display');
 const keys = document.querySelector('.calculator__keys');
 const clearKey = document.querySelector("[data-action|='clear']")
 
+const operatorActions = ['add', 'subtract', 'multiply', 'divide']
+
 var currentOperation = undefined;
 var currentOperands = [undefined, undefined];
 var newOperand = true;
@@ -16,12 +18,7 @@ keys.addEventListener('click', e => {
         if (!action) {
             console.log('number key!');
             numberPressed(key.textContent);
-        } else if (
-                action === 'add' ||
-                action === 'subtract' ||
-                action === 'multiply' ||
-                action === 'divide'
-            ) {
+        } else if (operatorActions.includes(action)) {
             operatorPressed(action);
         } else if (action === 'decimal') {
             decimalPressed();
@@ -64,15 +61,16 @@ var decimalPressed = function() {
 }
 
 var operatorPressed = function(operation) {
-    if(currentOperands[0] !== undefined && !newOperand) {
+    if (currentOperands[0] !== undefined && !newOperand) {
         currentOperands[1] = Number(display.innerHTML);
         currentOperands[0] = calculate(currentOperands[0], currentOperands[1], currentOperation)
         display.innerHTML = currentOperands[0];
+        newOperand = true;
     } else {
         currentOperands[0] = Number(display.innerHTML);
-    }
-    
-    newOperand = true;
+        newOperand = true;
+    }   
+
     currentOperation = operation;
 }
 
