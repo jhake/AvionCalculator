@@ -39,6 +39,7 @@ var numberPressed = function(number) {
         display.innerHTML = number;
         newOperand = false;
     } else {
+        if(display.innerHTML.length >= 13) return;
         if(display.innerHTML === '0'){
             display.innerHTML = number;
         } else {
@@ -53,6 +54,7 @@ var decimalPressed = function() {
         display.innerHTML = "0.";
         newOperand = false;
     } else {
+        if(display.innerHTML.length >= 12) return;
         if(!display.innerHTML.includes('.')){
             display.innerHTML += '.';
         }
